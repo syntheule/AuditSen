@@ -1,9 +1,6 @@
 import string
 
 def separate_sentences(text):
-    # transform the text into lower case
-
-    
     # Define a set of punctuation marks
     punctuation_marks = set(string.punctuation)
     
@@ -14,18 +11,24 @@ def separate_sentences(text):
     for i, char in enumerate(text):
         if char in punctuation_marks:
             # Extract the subsentence from the start index to the current index
-            subsentence = text[start:i+1].strip()
+            subsentence = text[start:i].strip()
             
-            # Add the subsentence to the list
-            subsentences.append(subsentence)
+            # Remove the punctuation mark
+            if subsentence:
+                if subsentence[-1] in punctuation_marks:
+                    subsentence = subsentence[:-1].strip()
+            
+            # Add the non-empty subsentence to the list
+            if subsentence:
+                subsentences.append(subsentence)
             
             # Update the start index for the next subsentence
             start = i + 1
     
-    # Add the last subsentence if it exists
-    if start < len(text):
-        subsentence = text[start:].strip()
-        subsentences.append(subsentence)
+    # Add the last subsentence if it exists and is non-empty
+    last_subsentence = text[start:].strip()
+    if last_subsentence:
+        subsentences.append(last_subsentence)
     
     return subsentences
 
