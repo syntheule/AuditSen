@@ -16,6 +16,27 @@ def separate_text(text):
   
   #make the variables needed: 1. the array for substring and 2. the looping start == 0
   sub_sentences = []
-  begin_lopp = 0
+  begin_loop = 0
   
-print(enumerate("Hello"))
+  # use enumerate to access both index and the value
+  # handling separating text
+  for i, char in enumerate(text):
+    if char in punctuation_marks:
+      
+      subsentence = text[begin_loop: i].strip()
+      
+      if subsentence:
+        sub_sentences.append(subsentence)
+        
+      begin_loop= i+1
+      
+      last_subsentence = text[begin_loop:].strip()
+      if last_subsentence:
+        sub_sentences.append(last_subsentence)
+    
+      
+  print(len(sub_sentences))
+  for sentence in sub_sentences:
+    print(sentence)
+
+separate_text("Hello! how are you? It is a wonderful day")
